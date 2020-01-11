@@ -24,7 +24,7 @@ public class ProfileServerRepository implements ProfileRepository {
         return mApi.getUserInfo(username).map(new Function<UserResponse, User>() {
             @Override
             public User apply(UserResponse userResponse) throws Exception {
-                return null;
+                return userResponse.getUser(); // null
             }
         });
     }
