@@ -1,6 +1,7 @@
 package com.elegion.data.repository;
 
 import com.elegion.data.database.BehanceDao;
+import com.elegion.domain.model.user.Image;
 import com.elegion.domain.model.user.User;
 import com.elegion.domain.repository.ProfileRepository;
 
@@ -23,13 +24,46 @@ public class ProfileDBRepository implements ProfileRepository {
             @Override
             public User call() throws Exception {
                 user = mBehanceDao.getUserByName(username);
+                Image image = mBehanceDao.getImageFromUser(user.getId());
+                user.setImage(image);
                 return user; //null
             }
         });
     }
 
     public void insertUser(){
-        //do nothing
+        //копируем код из Storage.inserUser и пределваем его без UserResponce
+        user = mBehanceDao.getUserByName(username);
+        Image image  = user.getImage();
+        image.setId(user.getId());
+        image.setUserId(user.getId());
+
+        mBehanceDao.insertUser(user);
+        mBehanceDao.insertImage(image);
+
     }
 
+    /*
+        public void insertUser(UserResponse response) {
+        User user = response.getUser();
+        Image image = user.getImage();
+        image.setId(user.getId());
+        image.setUserId(user.getId());
+
+        mBehanceDao.insertUser(user);
+        mBehanceDao.insertImage(image);
+    }
+
+    public UserResponse getUser(String username) {
+        User user = mBehanceDao.getUserByName(username);
+        Image image = mBehanceDao.getImageFromUser(user.getId());
+        user.setImage(image);
+
+        UserResponse response = new UserResponse();
+        response.setUser(user);
+
+        return response;
+    }
+
+     */
 }
