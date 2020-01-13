@@ -17,6 +17,10 @@ public class ProfileDBRepository implements ProfileRepository {
 
     @Inject
     BehanceDao mBehanceDao;
+
+    @Inject
+    public ProfileDBRepository(){}
+
     @Override
     public Single<User> getUser() {
 
@@ -31,8 +35,9 @@ public class ProfileDBRepository implements ProfileRepository {
         });
     }
 
+    @Override
     public void insertUser(){
-        //копируем код из Storage.inserUser и пределваем его без UserResponce
+        //копируем код из Storage.inserUser и переделываем его без UserResponce
         user = mBehanceDao.getUserByName(username);
         Image image  = user.getImage();
         image.setId(user.getId());
@@ -43,27 +48,4 @@ public class ProfileDBRepository implements ProfileRepository {
 
     }
 
-    /*
-        public void insertUser(UserResponse response) {
-        User user = response.getUser();
-        Image image = user.getImage();
-        image.setId(user.getId());
-        image.setUserId(user.getId());
-
-        mBehanceDao.insertUser(user);
-        mBehanceDao.insertImage(image);
-    }
-
-    public UserResponse getUser(String username) {
-        User user = mBehanceDao.getUserByName(username);
-        Image image = mBehanceDao.getImageFromUser(user.getId());
-        user.setImage(image);
-
-        UserResponse response = new UserResponse();
-        response.setUser(user);
-
-        return response;
-    }
-
-     */
 }
