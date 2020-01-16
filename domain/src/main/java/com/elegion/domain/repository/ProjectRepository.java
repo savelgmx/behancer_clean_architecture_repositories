@@ -11,8 +11,8 @@ import io.reactivex.Single;
  */
 
 public interface ProjectRepository {
-    public static final String SERVER = "SERVER";
-    public static final String DB = "DB";
+    String SERVER = "SERVER";
+    String DB = "DB";
 
     Single<List<Project>> getProjects();
 
