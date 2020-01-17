@@ -1,15 +1,14 @@
 package com.elegion.test.behancer.ui.projects;
 
-import com.elegion.data.Storage;
-import com.elegion.data.api.BehanceApi;
+import com.elegion.domain.service.ProjectService;
 import com.elegion.test.behancer.common.BasePresenter;
-//import com.elegion.test.behancer.utils.ApiUtils;
-import com.elegion.domain.ApiUtils;
 
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+
+//import com.elegion.test.behancer.utils.ApiUtils;
 
 /**
  * Created by Vladislav Falzan.
@@ -19,9 +18,7 @@ public class ProjectsPresenter extends BasePresenter {
 
     private ProjectsView mView;
     @Inject
-    Storage mStorage;
-    @Inject
-    BehanceApi mApi;
+    ProjectService mService;
 
     @Inject
     public ProjectsPresenter() {
@@ -33,16 +30,13 @@ public class ProjectsPresenter extends BasePresenter {
 
     public void getProjects() {
         mCompositeDisposable.add(
-                mApi.getProjects(com.elegion.data.BuildConfig.API_QUERY)
+                mService.getProjects()
                         .subscribeOn(Schedulers.io())
-                        .doOnSuccess(mStorage::insertProjects)
-                        .onErrorReturn(throwable ->
-                                ApiUtils.NETWORK_EXCEPTIONS.contains(throwable.getClass()) ? mStorage.getProjects() : null)
                         .observeOn(AndroidSchedulers.mainThread())
                         .doOnSubscribe(disposable -> mView.showRefresh())
                         .doFinally(mView::hideRefresh)
                         .subscribe(
-                                response -> mView.showProjects(response.getProjects()),
+                                response -> mView.showProjects(response),
                                 throwable -> mView.showError())
         );
     }
