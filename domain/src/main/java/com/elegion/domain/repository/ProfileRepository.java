@@ -9,5 +9,6 @@ public interface ProfileRepository {
     String DB = "DB";
 
     Single<User> getUser();
-    void insertUser();
+
+    void insertUser(User user);
 }

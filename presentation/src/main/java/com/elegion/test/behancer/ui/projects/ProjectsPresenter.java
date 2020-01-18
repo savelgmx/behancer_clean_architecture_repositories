@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-//import com.elegion.test.behancer.utils.ApiUtils;
 
 /**
  * Created by Vladislav Falzan.

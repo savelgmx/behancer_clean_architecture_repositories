@@ -36,7 +36,7 @@ public class ProfileDBRepository implements ProfileRepository {
     }
 
     @Override
-    public void insertUser(){
+    public void insertUser(User user) {
         //копируем код из Storage.inserUser и переделываем его без UserResponce
         user = mBehanceDao.getUserByName(username);
         Image image  = user.getImage();
@@ -45,6 +45,8 @@ public class ProfileDBRepository implements ProfileRepository {
 
         mBehanceDao.insertUser(user);
         mBehanceDao.insertImage(image);
+
+
 
     }
 
