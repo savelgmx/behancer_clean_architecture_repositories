@@ -19,19 +19,22 @@ public class ProfileServerRepository implements ProfileRepository {
     @Inject
     public ProfileServerRepository(){}
 
+
     @Override
-    public Single<User> getUser(){
+    public void insertUser(User user) {
+        //ничего не делаем ибо в нет в серверном АПИ такой функции
+        //а прописана она у нас только совместимости ради
+
+    }
+
+    @Override
+    public Single<User> getUserInfo(String username) {
         return mApi.getUserInfo(username).map(new Function<UserResponse, User>() {
             @Override
             public User apply(UserResponse userResponse) throws Exception {
                 return userResponse.getUser(); // null
             }
         });
-    }
-
-    @Override
-    public void insertUser(User user) {
-
     }
 
 }

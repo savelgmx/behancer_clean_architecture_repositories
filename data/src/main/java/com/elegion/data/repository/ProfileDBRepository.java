@@ -13,7 +13,7 @@ import io.reactivex.Single;
 
 public class ProfileDBRepository implements ProfileRepository {
     private User user;
-    private String username;
+   // private String username;
 
     @Inject
     BehanceDao mBehanceDao;
@@ -21,24 +21,11 @@ public class ProfileDBRepository implements ProfileRepository {
     @Inject
     public ProfileDBRepository(){}
 
-    @Override
-    public Single<User> getUser() {
-
-        return Single.fromCallable(new Callable<User>() {
-            @Override
-            public User call() throws Exception {
-                user = mBehanceDao.getUserByName(username);
-                Image image = mBehanceDao.getImageFromUser(user.getId());
-                user.setImage(image);
-                return user; //null
-            }
-        });
-    }
 
     @Override
     public void insertUser(User user) {
         //копируем код из Storage.inserUser и переделываем его без UserResponce
-        user = mBehanceDao.getUserByName(username);
+       // user = mBehanceDao.getUserByName(username);
         Image image  = user.getImage();
         image.setId(user.getId());
         image.setUserId(user.getId());
@@ -48,6 +35,19 @@ public class ProfileDBRepository implements ProfileRepository {
 
 
 
+    }
+
+    @Override
+    public Single<User> getUserInfo(final String username) {
+        return Single.fromCallable(new Callable<User>() {
+            @Override
+            public User call() throws Exception {
+                user = mBehanceDao.getUserByName(username);
+                Image image = mBehanceDao.getImageFromUser(user.getId());
+                user.setImage(image);
+                return user; //null
+            }
+        });
     }
 
 }

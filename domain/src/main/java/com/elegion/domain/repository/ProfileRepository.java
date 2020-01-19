@@ -8,7 +8,7 @@ public interface ProfileRepository {
     String SERVER = "SERVER";
     String DB = "DB";
 
-    Single<User> getUser();
-
     void insertUser(User user);
+
+    Single<User> getUserInfo(String username);
 }

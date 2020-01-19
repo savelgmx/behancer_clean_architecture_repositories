@@ -21,14 +21,16 @@ public class ProfileServiceImpl implements ProfileService{
 
     }
 
-    public Single getUser() {
-        return mProfileServerRepository.getUser()
+    @Override
+    public Single getUserInfo(String username) {
+        return mProfileServerRepository.getUserInfo(username)
                 .doOnSuccess(mProfileDBRepository::insertUser)
-                .onErrorReturn(throwable ->
-                ApiUtils.NETWORK_EXCEPTIONS.contains(throwable.getClass())
-                        ? mProfileDBRepository.getUser().blockingGet()
-                        :null);
+                .onErrorReturn(throwable->
+                        ApiUtils.NETWORK_EXCEPTIONS.contains(throwable.getClass())
+                ?mProfileDBRepository.getUserInfo(username).blockingGet()
+                :null);
     }
+
     public void insertUser(User user){
          mProfileDBRepository.insertUser(user);
     }
