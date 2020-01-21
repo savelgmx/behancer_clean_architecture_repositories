@@ -9,6 +9,16 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+
+/*
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ toothpick_registry_package_name : 'com.elegion.test.behancer' ]
+            }
+        }
+*/
+
     }
     buildTypes {
         release {
@@ -55,4 +65,13 @@ dependencies {
     implementation 'com.google.dagger:dagger-android-support:2.13'
 
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    /* toothpick
+
+     implementation 'com.github.stephanenicolas.toothpick:toothpick-runtime:3.1.0'
+    implementation 'com.github.stephanenicolas.toothpick:smoothie:3.1.0'
+    annotationProcessor 'com.github.stephanenicolas.toothpick:toothpick-compiler:3.1.0'
+
+     */
+
 }

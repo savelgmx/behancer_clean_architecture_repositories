@@ -14,6 +14,16 @@ android {
         buildConfigField "String", "API_URL", '"https://www.behance.net/"'
         buildConfigField "String", "API_KEY", '"4GcG7j6w60XEn4SRoNR1mb8JNkPICNDl"'
         buildConfigField "String", "API_QUERY", '"motorcycle"'
+
+/*
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ toothpick_registry_package_name : 'com.elegion.test.behancer' ]
+            }
+        }
+*/
+
+
     }
 
     buildTypes {
@@ -55,4 +65,14 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.13'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.13'
     implementation 'com.google.dagger:dagger-android-support:2.13'
+
+
+    /* toothpick
+
+     implementation 'com.github.stephanenicolas.toothpick:toothpick-runtime:3.1.0'
+    implementation 'com.github.stephanenicolas.toothpick:smoothie:3.1.0'
+    annotationProcessor 'com.github.stephanenicolas.toothpick:toothpick-compiler:3.1.0'
+
+     */
+
 }

@@ -10,6 +10,9 @@ dependencies {
 
     implementation 'com.google.dagger:dagger:2.13'
 
+    //toothpick
+    //    implementation 'com.github.stephanenicolas.toothpick:toothpick-runtime:3.1.0'
+
     implementation "android.arch.persistence.room:runtime:1.0.0"
 }
 
