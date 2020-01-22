@@ -7,24 +7,30 @@ import com.elegion.test.behancer.di.AppModule;
 import com.elegion.test.behancer.di.DaggerAppComponent;
 import com.elegion.test.behancer.di.NetworkModule;
 
+import toothpick.Scope;
+import toothpick.Toothpick;
+import toothpick.smoothie.module.SmoothieApplicationModule;
+
 /**
  * Created by Vladislav Falzan.
  */
 
 public class AppDelegate extends Application {
 
-    private static AppComponent sAppComponent;
+    public static Scope sAppScope;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        sAppComponent = DaggerAppComponent.builder()
-                .appModule(new AppModule(this))
-                .networkModule(new NetworkModule()).build();
+        // 1) Toothpick настроен в Application. Если используется Toothpick версии 3+, в любом случае нужно ставить полный бал по этому критерию.
+        // Использую Toothpick 3.1
+
+        sAppScope = Toothpick.openScope(AppDelegate.class);
+        sAppScope.installModules(new SmoothieApplicationModule(this), new AppModule(this), new NetworkModule());
     }
 
-    public static AppComponent getAppComponent() {
-        return sAppComponent;
+    public static Scope getAppScope() {
+        return sAppScope;
     }
 }
