@@ -25,6 +25,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import toothpick.Toothpick;
+
 /**
  * Created by Vladislav Falzan.
  */
@@ -47,9 +49,13 @@ public class ProjectsFragment extends PresenterFragment<ProjectsPresenter> imple
     public void onAttach(Context context) {
         super.onAttach(context);
 
+/*
         if (context instanceof RefreshOwner) {
             mRefreshOwner = ((RefreshOwner) context);
         }
+*/
+        Toothpick.inject(this,AppDelegate.getAppScope());
+
     }
 
     @Nullable
@@ -72,7 +78,7 @@ public class ProjectsFragment extends PresenterFragment<ProjectsPresenter> imple
             getActivity().setTitle(R.string.projects);
         }
 
-        AppDelegate.getAppComponent().inject(this);
+      //  AppDelegate.getAppComponent().inject(this);
         mPresenter.setView(this);
         mProjectsAdapter = new ProjectsAdapter(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
