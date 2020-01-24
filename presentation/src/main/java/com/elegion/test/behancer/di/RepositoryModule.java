@@ -25,7 +25,7 @@ public class RepositoryModule extends Module {
         //bind(IFoo.class).toProvider(FooProvider.class); // case 3
         //Каждый  @Inject IFoo будет ассоциирован с новой реализацией Foo, 
         // которую в свою очередь порождает создание нового объекта FooProvider.
-        bind(ProjectServerRepository.class).toInstance(provideProjectServerRepository());
+        bind(ProjectServerRepository.class).to(ProjectServerRepository.class);
         bind(ProfileDBRepository.class).toInstance(provideProjectDBRepository(mProjectDBRepository));
     }
 
