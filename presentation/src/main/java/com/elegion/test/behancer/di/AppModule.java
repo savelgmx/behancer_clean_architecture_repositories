@@ -8,7 +8,7 @@ import com.elegion.data.Storage;
 import com.elegion.data.database.BehanceDatabase;
 
 import toothpick.config.Module;
-import dagger.Provides;
+
 
 /**
  * Created by tanchuev on 23.04.2018.

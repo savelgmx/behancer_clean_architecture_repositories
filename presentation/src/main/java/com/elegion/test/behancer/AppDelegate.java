@@ -2,10 +2,12 @@ package com.elegion.test.behancer;
 
 import android.app.Application;
 
-import com.elegion.test.behancer.di.AppComponent;
+//import com.elegion.test.behancer.di.AppComponent;
 import com.elegion.test.behancer.di.AppModule;
-import com.elegion.test.behancer.di.DaggerAppComponent;
+//import com.elegion.test.behancer.di.DaggerAppComponent;
 import com.elegion.test.behancer.di.NetworkModule;
+import com.elegion.test.behancer.di.RepositoryModule;
+import com.elegion.test.behancer.di.ServiceModule;
 
 import toothpick.Scope;
 import toothpick.Toothpick;
@@ -27,7 +29,8 @@ public class AppDelegate extends Application {
         // Использую Toothpick 3.1
 
         sAppScope = Toothpick.openScope(AppDelegate.class);
-        sAppScope.installModules(new SmoothieApplicationModule(this), new AppModule(this), new NetworkModule());
+        sAppScope.installModules(new SmoothieApplicationModule(this), new AppModule(this), new NetworkModule(),
+                new RepositoryModule(),new ServiceModule());
     }
 
     public static Scope getAppScope() {

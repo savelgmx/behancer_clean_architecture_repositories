@@ -14,12 +14,13 @@ import toothpick.config.Module;
  */
 
 public class ServiceModule extends Module  {
+
     ProfileServiceImpl profileService;
     ProjectServiceImpl projectService;
     public ServiceModule(){
 
-        bind(ProjectService.class).toInstance(provideProjectService(projectService));
-        bind(ProfileService.class).toInstance(provideProfileService(profileService));
+        bind(ProjectService.class).to(ProjectServiceImpl.class);
+        bind(ProfileService.class).to(ProfileServiceImpl.class);
     }
 
 

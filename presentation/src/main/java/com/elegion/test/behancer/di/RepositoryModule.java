@@ -17,48 +17,27 @@ import toothpick.config.Module;
 
 public class RepositoryModule extends Module {
 
-    ProjectDBRepository     mProjectDBRepository;
-    ProjectServerRepository mProjectServerRepository;
 
 
     public RepositoryModule(){
-        //bind(IFoo.class).toProvider(FooProvider.class); // case 3
-        //Каждый  @Inject IFoo будет ассоциирован с новой реализацией Foo, 
-        // которую в свою очередь порождает создание нового объекта FooProvider.
-        bind(ProjectServerRepository.class).to(ProjectServerRepository.class);
-        bind(ProfileDBRepository.class).toInstance(provideProjectDBRepository(mProjectDBRepository));
-    }
+         bind(ProjectRepository.class).withName(ProjectRepository.SERVER).to(ProjectServerRepository.class);
+         bind(ProjectRepository.class).withName(ProjectRepository.DB).to(ProjectDBRepository.class);
+         bind(ProfileRepository.class).withName(ProfileRepository.SERVER).to(ProfileServerRepository.class);
+         bind(ProfileRepository.class).withName(ProfileRepository.DB).to(ProfileDBRepository.class);
+     }
 
-
-    /*   @Provides
-       @Singleton
-       @Named(ProjectRepository.SERVER)
-   */    ProjectRepository provideProjectServerRepository(ProjectServerRepository repository) {
+     ProjectRepository provideProjectServerRepository(ProjectServerRepository repository) {
         return repository;
     }
 
-/*
-    @Provides
-    @Singleton
-    @Named(ProjectRepository.DB)
-*/
     ProjectRepository provideProjectDBRepository(ProjectDBRepository repository) {
         return repository;
     }
-/*
-    @Provides
-    @Singleton
-    @Named(ProfileRepository.DB)
-*/
-    ProfileDBRepository provideProfileDBRepository(ProfileDBRepository repository) {
+    ProfileRepository provideProfileDBRepository(ProfileDBRepository repository) {
         return repository;
     }
 
 
-/*    @Provides
-    @Singleton
-    @Named(ProfileRepository.SERVER)
- */
     ProfileRepository provideProfileServerRepository(ProfileServerRepository repository) {
         return repository;
     }
