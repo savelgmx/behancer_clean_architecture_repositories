@@ -7,6 +7,8 @@ import com.elegion.test.behancer.AppDelegate;
 import com.elegion.data.Storage;
 import com.elegion.data.database.BehanceDatabase;
 
+import javax.inject.Inject;
+
 import toothpick.config.Module;
 
 
@@ -16,6 +18,8 @@ import toothpick.config.Module;
 
 
 public class AppModule extends Module {
+    @Inject
+    BehanceDao mBehanceDao;
 
     private final AppDelegate mApp;
 
@@ -23,12 +27,10 @@ public class AppModule extends Module {
         this.mApp = mApp;
         bind(AppDelegate.class).toInstance(provideApp());
         bind(Storage.class).toInstance(provideStorage());
+        bind(BehanceDao.class).toInstance(provideDao());
     }
 
-    AppDelegate provideApp() {
-        return mApp;
-    }
-
+/*
     BehanceDatabase provideDatabase() {
         return Room.databaseBuilder(mApp, BehanceDatabase.class, "behance_database")
                 .fallbackToDestructiveMigration()
@@ -42,6 +44,11 @@ public class AppModule extends Module {
     Storage provideStorage(BehanceDao dao) {
         return new Storage(dao);
     }
+*/
+
+    AppDelegate provideApp() {
+        return mApp;
+    }
 
     Storage provideStorage() {
         final BehanceDatabase database = Room.databaseBuilder(mApp, BehanceDatabase.class, "behance_database")
@@ -49,6 +56,14 @@ public class AppModule extends Module {
                 .build();
 
         return new Storage(database.getBehanceDao());
+    }
+    BehanceDao provideDao() {
+        final BehanceDatabase database = Room.databaseBuilder(mApp, BehanceDatabase.class, "behance_database")
+                .fallbackToDestructiveMigration()
+                .build();
+
+        return database.getBehanceDao();
+
     }
 
 }
