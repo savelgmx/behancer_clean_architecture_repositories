@@ -49,11 +49,10 @@ public class ProjectsFragment extends PresenterFragment<ProjectsPresenter> imple
     public void onAttach(Context context) {
         super.onAttach(context);
 
-/*
         if (context instanceof RefreshOwner) {
             mRefreshOwner = ((RefreshOwner) context);
         }
-*/
+
         Toothpick.inject(this,AppDelegate.getAppScope());
 
     }

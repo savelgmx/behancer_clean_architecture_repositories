@@ -60,8 +60,7 @@ public class ProfileFragment extends PresenterFragment<ProfilePresenter> impleme
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-     //   mRefreshOwner = context instanceof RefreshOwner ? (RefreshOwner) context : null;
-
+        mRefreshOwner = context instanceof RefreshOwner ? (RefreshOwner) context : null;
         Toothpick.inject(this,AppDelegate.getAppScope());
     }
 
@@ -94,7 +93,6 @@ public class ProfileFragment extends PresenterFragment<ProfilePresenter> impleme
             getActivity().setTitle(mUsername);
         }
 
-      //  AppDelegate.getAppComponent().inject(this);
 
         mPresenter.setView(this);
         mProfileView.setVisibility(View.VISIBLE);
