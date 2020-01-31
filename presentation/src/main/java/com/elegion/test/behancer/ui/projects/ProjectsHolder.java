@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.elegion.test.behancer.R;
 import com.elegion.domain.model.project.Project;
+import com.elegion.test.behancer.databinding.ProjectBinding;
 import com.elegion.test.behancer.utils.DateUtils;
 import com.squareup.picasso.Picasso;
 
@@ -16,36 +17,17 @@ import com.squareup.picasso.Picasso;
 
 public class ProjectsHolder extends RecyclerView.ViewHolder {
 
-    private static final int FIRST_OWNER_INDEX = 0;
+    ProjectBinding mProjectBinding;
 
-    private ImageView mImage;
-    private TextView mName;
-    private TextView mUsername;
-    private TextView mPublishedOn;
 
-    public ProjectsHolder(View itemView) {
-        super(itemView);
-        mImage = itemView.findViewById(R.id.image);
-        mName = itemView.findViewById(R.id.tv_name);
-        mUsername = itemView.findViewById(R.id.tv_username);
-        mPublishedOn = itemView.findViewById(R.id.tv_published);
+    public ProjectsHolder(ProjectBinding binding) {
+        super(binding.getRoot());
+        mProjectBinding = binding;
     }
 
     public void bind(Project item, ProjectsAdapter.OnItemClickListener onItemClickListener) {
-        Picasso.with(mImage.getContext()).load(item.getCover().getPhotoUrl())
-                .fit()
-                .into(mImage);
-
-        mName.setText(item.getName());
-        mUsername.setText(item.getOwners().get(FIRST_OWNER_INDEX).getUsername());
-        mPublishedOn.setText(DateUtils.format(item.getPublishedOn()));
-
-        if (onItemClickListener != null) {
-            itemView.setOnClickListener(v -> onItemClickListener.onItemClick(
-                    item.getOwners()
-                            .get(FIRST_OWNER_INDEX)
-                            .getUsername()
-            ));
-        }
+        mProjectBinding.setProject(new ProjectListItemViewModel(item));
+        mProjectBinding.setOnItemClickListener(onItemClickListener);
+        mProjectBinding.executePendingBindings(); // Заставляет сделать связывание сразу, как только метод был вызван.
     }
 }

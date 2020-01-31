@@ -1,6 +1,8 @@
 package com.elegion.test.behancer.ui.projects;
 
 
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableBoolean;
 import android.support.v4.widget.SwipeRefreshLayout;
 import com.elegion.domain.model.project.Project;
 import com.elegion.domain.service.ProjectService;
@@ -26,12 +28,10 @@ public class ProjectsViewModel {
 
     private Disposable mDisposable;
     private ProjectsAdapter.OnItemClickListener mOnItemClickListener;
-/*
     private ObservableBoolean mIsErrorVisible = new ObservableBoolean(false);
     private ObservableBoolean mIsLoading = new ObservableBoolean(false);
     private ObservableArrayList<Project> mProjects = new ObservableArrayList<>();
     private SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = this::loadProjects;
-*/
 
     @Inject
     public ProjectsViewModel() {
@@ -51,7 +51,6 @@ public class ProjectsViewModel {
     }
 
 */
-/*
     public void loadProjects() {
         mDisposable = mService.getProjects()
                 .doOnSuccess(response -> mService.insertProjects(response))
@@ -66,7 +65,6 @@ public class ProjectsViewModel {
                         },
                         throwable -> mIsErrorVisible.set(true));
     }
-*/
 
     public void dispatchDetach() {
         if (mDisposable != null) {
@@ -82,7 +80,6 @@ public class ProjectsViewModel {
         mOnItemClickListener = onItemClickListener;
     }
 
-/*
     public ObservableBoolean getIsErrorVisible() {
         return mIsErrorVisible;
     }
@@ -98,5 +95,4 @@ public class ProjectsViewModel {
     public SwipeRefreshLayout.OnRefreshListener getOnRefreshListener() {
         return mOnRefreshListener;
     }
-*/
 }

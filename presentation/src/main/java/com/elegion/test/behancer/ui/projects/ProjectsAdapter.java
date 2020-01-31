@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.elegion.test.behancer.R;
 import com.elegion.domain.model.project.Project;
+import com.elegion.test.behancer.databinding.ProjectBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,19 +20,21 @@ import java.util.List;
 public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsHolder> {
 
     @NonNull
-    private final List<Project> mProjects = new ArrayList<>();
+    private final List<Project> mProjects;
     private final OnItemClickListener mOnItemClickListener;
 
-    public ProjectsAdapter(OnItemClickListener onItemClickListener) {
+    public ProjectsAdapter(List<Project> projects, OnItemClickListener onItemClickListener) {
         mOnItemClickListener = onItemClickListener;
+        mProjects = projects;
     }
 
     @NonNull
     @Override
     public ProjectsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.li_projects, parent, false);
-        return new ProjectsHolder(view);
+        ProjectBinding binding = ProjectBinding.inflate(inflater, parent, false);
+
+        return new ProjectsHolder(binding);
     }
 
     @Override
