@@ -61,7 +61,7 @@ public class ProjectsViewModel {
                 .subscribe(
                         response -> {
                             mIsErrorVisible.set(false);
-                            mProjects.addAll(response.getProjects());
+                            mProjects.addAll(response);
                         },
                         throwable -> mIsErrorVisible.set(true));
     }

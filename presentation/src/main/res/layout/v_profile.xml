@@ -6,10 +6,9 @@
     <data class = "ProfileItemBinding">
 
         <import type="com.elegion.test.behancer.utils.DateUtils" />
-
         <variable
             name="user"
-            type="com.elegion.test.behancer.data.model.user.User" />
+            type="com.elegion.domain.model.user.User" />
     </data>
 
 

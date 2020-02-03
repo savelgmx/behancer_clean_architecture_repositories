@@ -48,7 +48,7 @@ public class ProfileViewModel {
                 .subscribe(
                         response -> {
                             mIsErrorVisible.set(false);
-                            mUser.set(response.getUser());
+                            mUser.set((User) response);
                         },
                         throwable -> mIsErrorVisible.set(true));
     }
