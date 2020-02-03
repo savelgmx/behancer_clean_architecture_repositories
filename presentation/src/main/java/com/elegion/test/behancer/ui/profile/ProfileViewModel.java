@@ -3,11 +3,6 @@ package com.elegion.test.behancer.ui.profile;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.support.v4.widget.SwipeRefreshLayout;
-
-
-import com.elegion.data.Storage;
-import com.elegion.data.api.BehanceApi;
-import com.elegion.domain.ApiUtils;
 import com.elegion.domain.model.user.User;
 import com.elegion.domain.service.ProfileService;
 
@@ -18,13 +13,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class ProfileViewModel {
-/*
-    @Inject
-    Storage mStorage;
-    @Inject
-    BehanceApi mBehanceApi;
-*/
-
     @Inject
     ProfileService mService;
 

@@ -16,12 +16,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ProjectsViewModel {
 
-/*
-    @Inject
-    Storage mStorage;
-    @Inject
-    BehanceApi mBehanceApi;
-*/
 
     @Inject
     ProjectService mService;
@@ -37,20 +31,6 @@ public class ProjectsViewModel {
     public ProjectsViewModel() {
     }
 
- /*   public void getProjects() {
-        mCompositeDisposable.add(
-                mService.getProjects()
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .doOnSubscribe(disposable -> mView.showRefresh())
-                        .doFinally(mView::hideRefresh)
-                        .subscribe(
-                                response -> mView.showProjects(response),
-                                throwable -> mView.showError())
-        );
-    }
-
-*/
     public void loadProjects() {
         mDisposable = mService.getProjects()
                 .doOnSuccess(response -> mService.insertProjects(response))
